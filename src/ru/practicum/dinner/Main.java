@@ -16,7 +16,7 @@ public class Main {
 
         while (true) {
             printMenu();
-            String command = scanner.nextLine();
+            String command = scanner.nextLine().trim();
 
             switch (command) {
                 case "1":
@@ -27,6 +27,8 @@ public class Main {
                     break;
                 case "3":
                     return;
+                default:
+                    System.out.println("Извините, такой команды пока нет:(");
             }
         }
     }
@@ -49,6 +51,10 @@ public class Main {
 
     private static void generateDishCombo() {
         try {
+            if (dc.dishMenuIsEmpty()) {
+                System.out.println("Список меню пуст!");
+                return;
+            }
             System.out.println("Начинаем конструировать обед...");
 
             System.out.println("Введите количество наборов, которые нужно сгенерировать:");
@@ -67,10 +73,6 @@ public class Main {
                         dishTypes.add(nextItem);
                     }
                 } else {
-                    if (dc.dishMenuIsEmpty()) {
-                        System.out.println("Список меню пуст!");
-                        return;
-                    }
                     System.out.printf("Категории %s нет в меню, попробуйте еще раз\n", nextItem);
                 }
                 nextItem = scanner.nextLine();
